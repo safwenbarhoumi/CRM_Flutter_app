@@ -12,10 +12,12 @@ import 'features/Signup/data/repositories/SignupRepositoryImpl.dart';
 import 'features/Signup/domain/usecases/SignupUseCase.dart';
 import 'features/Signup/presentation/cubit/SignupCubit.dart';
 import 'features/Signup/presentation/screens/SignupScreen.dart';
+import 'features/SplashScreen/splashScreen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  CacheHelper().init();
+  await CacheHelper().init();
+
   runApp(const MyApp());
 }
 
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Créer une instance de SignupUseCase
+    // Create an instance of SignupUseCase
     final signupUseCase = SignupUseCase(
       repository: SignupRepositoryImpl(
         remoteDataSource: SignupRemoteDataSource(api: DioConsumer(dio: Dio())),
@@ -35,17 +37,18 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => SignupCubit(
-              signupUseCase: signupUseCase), // Injecter SignupUseCase
+          create: (context) => SignupCubit(signupUseCase: signupUseCase),
         ),
         BlocProvider(
           create: (context) => UserCubit()..eitherFailureOrUser(1),
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         routes: {
-          '/aaa': (context) => const UserScreen(),
-          '/': (context) => SignupScreen(),
+          '/': (context) => SplashScreen(), // Start with SplashScreen
+          '/signup': (context) => SignupScreen(),
+          '/user': (context) => const UserScreen(),
         },
         initialRoute: '/',
       ),
