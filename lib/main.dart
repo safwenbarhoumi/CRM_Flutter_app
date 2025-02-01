@@ -19,6 +19,7 @@ import 'features/Signup/domain/usecases/SignupUseCase.dart';
 import 'features/Signup/presentation/cubit/SignupCubit.dart';
 import 'features/Signup/presentation/screens/SignupScreen.dart';
 import 'features/SplashScreen/splashScreen.dart';
+import 'features/bottomNavBar/bottomNavigationScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,12 +64,14 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => SplashScreen(),
-          '/signup': (context) => SignupScreen(),
-          '/login': (context) => LoginScreen(),
-          '/user': (context) => const UserScreen(),
+          '/': (context) => const SplashScreen(), // Écran de démarrage
+          '/signup': (context) => SignupScreen(), // Écran d'inscription
+          '/login': (context) => LoginScreen(), // Écran de connexion
+          '/user': (context) => const UserScreen(), // Écran utilisateur
+          '/home': (context) =>
+              const BottomNavigationScreen(), // Écran principal avec Bottom Navigation Bar
         },
-        initialRoute: '/',
+        initialRoute: '/', // Route initiale
       ),
     );
   }
