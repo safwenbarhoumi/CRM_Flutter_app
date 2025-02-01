@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../cubit/SignupCubit.dart';
-import 'SignupState.dart';
 
-class SignupScreen extends StatelessWidget {
+import '../cubit/LoginCubit.dart';
+import 'LoginState.dart';
+
+class LoginScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final _fullNameController = TextEditingController();
-  final _phoneNumberController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
 
-  SignupScreen({super.key});
+  LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +22,16 @@ class SignupScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 20),
-                Image.asset('assets/logo.png', height: 60), // أضف شعار التطبيق
+                Image.asset('assets/logo.png',
+                    height: 60), // Logo de l'application
                 const SizedBox(height: 20),
                 const Text(
-                  "Sign Up",
+                  "Log In",
                   style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 10),
                 const Text(
-                  "Create your account to get started",
+                  "Enter your credentials to continue",
                   style: TextStyle(fontSize: 16, color: Colors.grey),
                 ),
                 const SizedBox(height: 30),
@@ -40,46 +39,38 @@ class SignupScreen extends StatelessWidget {
                   key: _formKey,
                   child: Column(
                     children: [
-                      _buildTextField(
-                          _fullNameController, "Full Name", Icons.person),
-                      _buildTextField(
-                          _phoneNumberController, "Phone Number", Icons.phone),
                       _buildTextField(_emailController, "Email", Icons.email,
                           isEmail: true),
                       _buildTextField(
                           _passwordController, "Password", Icons.lock,
                           isPassword: true),
-                      _buildTextField(_confirmPasswordController,
-                          "Confirm Password", Icons.lock,
-                          isPassword: true),
                     ],
                   ),
                 ),
                 const SizedBox(height: 20),
-                BlocConsumer<SignupCubit, SignupState>(
+                BlocConsumer<LoginCubit, LoginState>(
                   listener: (context, state) {
-                    if (state is SignupSuccess) {
+                    if (state is LoginSuccess) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Signup successful!')),
+                        const SnackBar(content: Text('Login successful!')),
                       );
-                    } else if (state is SignupFailure) {
+                      Navigator.pushReplacementNamed(
+                          context, '/user'); // Redirection après connexion
+                    } else if (state is LoginFailure) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text(state.errMessage)),
                       );
                     }
                   },
                   builder: (context, state) {
-                    return state is SignupLoading
+                    return state is LoginLoading
                         ? const CircularProgressIndicator()
                         : ElevatedButton(
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                context.read<SignupCubit>().signup(
-                                      _fullNameController.text,
-                                      _phoneNumberController.text,
+                                context.read<LoginCubit>().login(
                                       _emailController.text,
                                       _passwordController.text,
-                                      _confirmPasswordController.text,
                                     );
                               }
                             },
@@ -90,7 +81,7 @@ class SignupScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                             ),
-                            child: const Text("Sign Up",
+                            child: const Text("Login",
                                 style: TextStyle(
                                     fontSize: 18, color: Colors.white)),
                           );
@@ -100,14 +91,13 @@ class SignupScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Already have an account? "),
+                    const Text("Don't have an account? "),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, '/login');
-                        //Navigator.pushReplacementNamed(context, '/login');
+                        Navigator.pushNamed(context, '/signup');
                       },
                       child: const Text(
-                        "Log In",
+                        "Sign Up",
                         style: TextStyle(
                             color: Colors.blue, fontWeight: FontWeight.bold),
                       ),
@@ -147,7 +137,7 @@ class SignupScreen extends StatelessWidget {
             return 'Please enter your $hint';
           }
           if (isEmail &&
-              !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}\$').hasMatch(value)) {
+              !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
             return 'Please enter a valid email';
           }
           return null;

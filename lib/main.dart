@@ -6,6 +6,12 @@ import 'package:happytech_clean_architecture/features/user/presentation/cubit/us
 import 'package:happytech_clean_architecture/features/user/presentation/screens/user_screen.dart';
 
 import 'core/databases/api/dio_consumer.dart';
+import 'features/Login/data/datasources/LoginLocalDataSource.dart';
+import 'features/Login/data/datasources/LoginRemoteDataSource.dart';
+import 'features/Login/data/repositories/LoginRepositoryImpl.dart';
+import 'features/Login/domain/usecases/LoginUseCase.dart';
+import 'features/Login/presentation/cubit/LoginCubit.dart';
+import 'features/Login/presentation/screens/LoginScreen.dart';
 import 'features/Signup/data/datasources/SignupLocalDataSource.dart';
 import 'features/Signup/data/datasources/SignupRemoteDataSource .dart';
 import 'features/Signup/data/repositories/SignupRepositoryImpl.dart';
@@ -34,6 +40,14 @@ class MyApp extends StatelessWidget {
       ),
     );
 
+    // Create an instance of LoginUseCase and its dependencies
+    final loginUseCase = LoginUseCase(
+      repository: LoginRepositoryImpl(
+        remoteDataSource: LoginRemoteDataSource(api: DioConsumer(dio: Dio())),
+        localDataSource: LoginLocalDataSource(cache: CacheHelper()),
+      ),
+    );
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -42,12 +56,16 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => UserCubit()..eitherFailureOrUser(1),
         ),
+        BlocProvider<LoginCubit>(
+          create: (context) => LoginCubit(loginUseCase: loginUseCase),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => SplashScreen(), // Start with SplashScreen
+          '/': (context) => SplashScreen(),
           '/signup': (context) => SignupScreen(),
+          '/login': (context) => LoginScreen(),
           '/user': (context) => const UserScreen(),
         },
         initialRoute: '/',

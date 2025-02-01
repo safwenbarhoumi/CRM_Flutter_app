@@ -4,7 +4,9 @@ import 'package:happytech_clean_architecture/core/errors/error_model.dart';
 //!ServerException
 class ServerException implements Exception {
   final ErrorModel errorModel;
+
   ServerException(this.errorModel);
+  String get errorMessage => errorModel.errorMessage;
 }
 
 //!CacheExeption

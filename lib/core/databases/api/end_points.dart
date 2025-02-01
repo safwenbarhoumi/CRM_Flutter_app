@@ -4,6 +4,7 @@ class EndPoints {
   static const String user = "users/";
   static const String post = "posts/";
   static const String signup = "signup/";
+  static const String login = "login/";
 }
 
 class ApiKey {
