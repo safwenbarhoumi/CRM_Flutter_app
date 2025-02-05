@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import '../Profile/presentation/screens/ProfileScreen.dart';
 import 'bottomNavigationBar.dart';
-import 'chat_screen.dart';
+import 'chat.dart';
+import 'chat_list_screen.dart';
 import 'dashboard_screen.dart';
 import 'demandes_screen.dart';
 import 'profil_screen.dart';
@@ -19,14 +21,14 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   final List<Widget> _screens = [
     const DashboardScreen(),
     const DemandesScreen(),
-    const ChatScreen(),
-    const ProfilScreen(),
+    ChatListScreen(),
+    ProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_selectedIndex], // Afficher l'écran sélectionné
+      body: _screens[_selectedIndex],
       bottomNavigationBar: CustomBottomNavigationBar(
         selectedIndex: _selectedIndex, // Correction ici
         onItemTapped: (index) {

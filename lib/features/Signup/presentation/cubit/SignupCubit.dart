@@ -10,17 +10,17 @@ class SignupCubit extends Cubit<SignupState> {
 
   void signup(String fullName, String phoneNumber, String email,
       String password, String confirmPassword) async {
-    emit(SignupLoading());
+    //emit(SignupLoading());
     final params = SignupParams(
       fullName: fullName,
       phoneNumber: phoneNumber,
       email: email,
       password: password,
-      confirmPassword: confirmPassword,
     );
     final result = await signupUseCase(params);
+    //print("resultat ::: $result");
     result.fold(
-      (failure) => emit(SignupFailure(failure.errMessage)),
+      (failure) => null,
       (signupData) => emit(SignupSuccess(signupData)),
     );
   }

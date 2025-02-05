@@ -6,13 +6,11 @@ class SignupModel extends SignupEntity {
     required String phoneNumber,
     required String email,
     required String password,
-    required String confirmPassword,
   }) : super(
           fullName: fullName,
           phoneNumber: phoneNumber,
           email: email,
           password: password,
-          confirmPassword: confirmPassword,
         );
 
   factory SignupModel.fromJson(Map<String, dynamic> json) {
@@ -21,7 +19,6 @@ class SignupModel extends SignupEntity {
       phoneNumber: json['phoneNumber'],
       email: json['email'],
       password: json['password'],
-      confirmPassword: json['confirmPassword'],
     );
   }
 
@@ -31,7 +28,6 @@ class SignupModel extends SignupEntity {
       'phoneNumber': phoneNumber,
       'email': email,
       'password': password,
-      'confirmPassword': confirmPassword,
     };
   }
 }

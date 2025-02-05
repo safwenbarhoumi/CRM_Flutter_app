@@ -44,9 +44,9 @@ class SplashView extends StatelessWidget {
             children: [
               // Animated Logo
               Image.asset(
-                'assets/logo.png',
-                width: 150,
-                height: 150,
+                'assets/logo/crm.png',
+                width: 250,
+                height: 250,
               ).animate().fadeIn(duration: 1.seconds).scale(),
 
               const SizedBox(height: 20),

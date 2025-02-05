@@ -25,13 +25,22 @@ class SignupRepositoryImpl implements SignupRepository {
         phoneNumber: params.phoneNumber,
         email: params.email,
         password: params.password,
-        confirmPassword: params.confirmPassword,
       );
+
       final remoteResponse = await remoteDataSource.signup(signupData);
-      localDataSource.cacheSignupData(remoteResponse);
+      print("remoteResponse from IMPL: $remoteResponse");
+
+      // Ensure signup data is cached
+      // await localDataSource.cacheSignupData(remoteResponse);
+
       return Right(remoteResponse);
     } on ServerException catch (e) {
-      return Left(Failure(errMessage: "Failed !"));
+      print("ServerException occurred.");
+      return Left(
+          Failure(errMessage: "Erreur du serveur, veuillez réessayer."));
+    } catch (e) {
+      print("Unexpected Error: $e");
+      return Left(Failure(errMessage: ""));
     }
   }
 }

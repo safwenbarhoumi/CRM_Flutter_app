@@ -12,6 +12,12 @@ import 'features/Login/data/repositories/LoginRepositoryImpl.dart';
 import 'features/Login/domain/usecases/LoginUseCase.dart';
 import 'features/Login/presentation/cubit/LoginCubit.dart';
 import 'features/Login/presentation/screens/LoginScreen.dart';
+import 'features/Profile/data/datasources/ProfileLocalDataSource.dart';
+import 'features/Profile/data/datasources/ProfileRemoteDataSource.dart';
+import 'features/Profile/data/repositories/ProfileRepositoryImpl.dart';
+import 'features/Profile/domain/usecases/ProfileUseCase.dart';
+import 'features/Profile/presentation/cubit/ProfileCubit.dart';
+import 'features/Profile/presentation/screens/ProfileScreen.dart';
 import 'features/Signup/data/datasources/SignupLocalDataSource.dart';
 import 'features/Signup/data/datasources/SignupRemoteDataSource .dart';
 import 'features/Signup/data/repositories/SignupRepositoryImpl.dart';
@@ -49,6 +55,14 @@ class MyApp extends StatelessWidget {
       ),
     );
 
+    // Create an instance of ProfileUseCase and its dependencies
+    final profileUseCase = ProfileUseCase(
+      repository: ProfileRepositoryImpl(
+        remoteDataSource: ProfileRemoteDataSource(api: DioConsumer(dio: Dio())),
+        localDataSource: ProfileLocalDataSource(cache: CacheHelper()),
+      ),
+    );
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -60,18 +74,22 @@ class MyApp extends StatelessWidget {
         BlocProvider<LoginCubit>(
           create: (context) => LoginCubit(loginUseCase: loginUseCase),
         ),
+        BlocProvider<ProfileCubit>(
+          create: (context) => ProfileCubit(profileUseCase: profileUseCase),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => const SplashScreen(), // Écran de démarrage
-          '/signup': (context) => SignupScreen(), // Écran d'inscription
-          '/login': (context) => LoginScreen(), // Écran de connexion
-          '/user': (context) => const UserScreen(), // Écran utilisateur
+          '/': (context) => const SplashScreen(), // Splash Screen
+          '/signup': (context) => SignupScreen(), // Signup Screen
+          '/login': (context) => LoginScreen(), // Login Screen
+          '/user': (context) => const UserScreen(), // User Screen
+          '/profile': (context) => ProfileScreen(),
           '/home': (context) =>
-              const BottomNavigationScreen(), // Écran principal avec Bottom Navigation Bar
+              const BottomNavigationScreen(), // Main Screen with Bottom Navigation Bar
         },
-        initialRoute: '/', // Route initiale
+        initialRoute: '/', // Initial route
       ),
     );
   }
