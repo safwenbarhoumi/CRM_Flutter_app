@@ -9,7 +9,7 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit({required this.loginUseCase}) : super(LoginInitial());
 
   void login(String email, String password) async {
-    emit(LoginLoading());
+    // emit(LoginLoading());
     final params = LoginParams(
       email: email,
       password: password,

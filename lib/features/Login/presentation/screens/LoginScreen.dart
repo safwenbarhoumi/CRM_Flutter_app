@@ -65,25 +65,35 @@ class LoginScreen extends StatelessWidget {
                   builder: (context, state) {
                     return state is LoginLoading
                         ? const CircularProgressIndicator()
-                        : ElevatedButton(
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                context.read<LoginCubit>().login(
-                                      _emailController.text,
-                                      _passwordController.text,
-                                    );
+                        : BlocListener<LoginCubit, LoginState>(
+                            listener: (context, state) {
+                              if (state is LoginFailure) {
+                                showErrorDialog(context, state.errMessage);
                               }
                             },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blue,
-                              padding: const EdgeInsets.symmetric(vertical: 14),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  context.read<LoginCubit>().login(
+                                        _emailController.text,
+                                        _passwordController.text,
+                                      );
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue,
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 14),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              child: const Text(
+                                "Login",
+                                style: TextStyle(
+                                    fontSize: 18, color: Colors.white),
                               ),
                             ),
-                            child: const Text("Login",
-                                style: TextStyle(
-                                    fontSize: 18, color: Colors.white)),
                           );
                   },
                 ),
@@ -161,4 +171,20 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+void showErrorDialog(BuildContext context, String message) {
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: const Text("Login Failed"),
+      content: Text(message),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text("OK"),
+        ),
+      ],
+    ),
+  );
 }

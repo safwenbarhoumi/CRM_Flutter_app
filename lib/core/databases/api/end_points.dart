@@ -5,7 +5,7 @@ class EndPoints {
   static const String post = "posts/";
   static const String signup = "${baserUrl}api/auth/signup";
   static const String profile = "posts/";
-  static const String login = "login/";
+  static const String login = "${baserUrl}api/auth/signin";
 }
 
 class ApiKey {

@@ -9,21 +9,21 @@ class DioConsumer extends ApiConsumer {
 
   DioConsumer({required this.dio}) {
     dio.options.baseUrl = EndPoints.baserUrl;
-    print("🌐 Base URL: ${dio.options.baseUrl}"); // Debugging base URL
+    // print("Base URL: ${dio.options.baseUrl}"); // Debugging base URL
 
     // Add logging interceptor
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {
-        print("📤 Request to: ${options.uri}");
-        print("🔄 Data Sent: ${options.data}");
+        print("Request to: ${options.uri}");
+        print("Data Sent: ${options.data}");
         return handler.next(options);
       },
       onResponse: (response, handler) {
-        print("📥 Response Data: ${response.data}");
+        print("Response Data: ${response.data}");
         return handler.next(response);
       },
       onError: (DioException e, handler) {
-        print("❌ Dio Error: ${e.message}");
+        print("Dio Error: ${e.message}");
         return handler.next(e);
       },
     ));
@@ -41,7 +41,7 @@ class DioConsumer extends ApiConsumer {
         data: isFormData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
       );
-      print("📥 Response Data: ${response.data}");
+      print("Response Data: ${response.data}");
       return response.data;
     } on DioException catch (e) {
       handleDioException(e);
@@ -57,7 +57,7 @@ class DioConsumer extends ApiConsumer {
     try {
       var response =
           await dio.get(path, data: data, queryParameters: queryParameters);
-      print("📥 GET Response Data: ${response.data}"); // Debugging response
+      print("GET Response Data: ${response.data}"); // Debugging response
       return response.data;
     } on DioException catch (e) {
       handleDioException(e);
@@ -75,7 +75,7 @@ class DioConsumer extends ApiConsumer {
         data: data,
         queryParameters: queryParameters,
       );
-      print("📥 DELETE Response Data: ${response.data}"); // Debugging response
+      print("DELETE Response Data: ${response.data}"); // Debugging response
       return response.data;
     } on DioException catch (e) {
       handleDioException(e);
@@ -95,7 +95,7 @@ class DioConsumer extends ApiConsumer {
         data: isFormData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
       );
-      print("📥 PATCH Response Data: ${response.data}"); // Debugging response
+      print("PATCH Response Data: ${response.data}"); // Debugging response
       return response.data;
     } on DioException catch (e) {
       handleDioException(e);
@@ -105,7 +105,15 @@ class DioConsumer extends ApiConsumer {
 
   //! Exception Handling
   void handleDioException(DioException e) {
-    print("❌ DioException: ${e.message}"); // Debugging error
-    throw ServerException((e.message ?? "Unknown Dio error") as ErrorModel);
+    print("DioException: ${e.message}"); // Debugging error
+
+    throw ServerException(
+      ErrorModel(
+        status:
+            e.response?.statusCode ?? 500, // Default to 500 if no status code
+        errorMessage:
+            e.response?.data["message"] ?? e.message ?? "Unknown error",
+      ),
+    );
   }
 }

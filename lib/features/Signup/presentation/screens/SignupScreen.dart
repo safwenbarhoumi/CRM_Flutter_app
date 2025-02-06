@@ -183,22 +183,56 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   Widget _buildSignupButton(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        if (_formKey.currentState!.validate()) {
+    return BlocListener<SignupCubit, SignupState>(
+      listener: (context, state) {
+        if (state is SignupFailure) {
+          showErrorDialog(context, state.errMessage);
+        } else if (state is SignupSuccess) {
           Navigator.pushNamed(context, '/home');
         }
       },
-      style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(vertical: 14, horizontal: 30),
-        backgroundColor: Colors.blueAccent,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        elevation: 5,
-        shadowColor: Colors.blueAccent.withOpacity(0.5),
-      ),
-      child: const Text("Sign Up",
+      child: ElevatedButton(
+        onPressed: () {
+          if (_formKey.currentState!.validate()) {
+            context.read<SignupCubit>().signup(
+                  _fullNameController.text,
+                  _phoneNumberController.text,
+                  _emailController.text,
+                  _passwordController.text,
+                  _confirmPasswordController.text,
+                );
+          }
+        },
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.symmetric(vertical: 14, horizontal: 30),
+          backgroundColor: Colors.blueAccent,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          elevation: 5,
+          shadowColor: Colors.blueAccent.withOpacity(0.5),
+        ),
+        child: const Text(
+          "Sign Up",
           style: TextStyle(
-              fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+              fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+
+  void showErrorDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Signup Failed"),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("OK"),
+          ),
+        ],
+      ),
     );
   }
 }

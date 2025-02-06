@@ -8,6 +8,7 @@ class LoginRemoteDataSource {
   LoginRemoteDataSource({required this.api});
 
   Future<LoginModel> login(LoginModel loginData) async {
+    print("Requesting: ${EndPoints.login}");
     final response = await api.post(
       EndPoints.login,
       data: loginData.toJson(),
