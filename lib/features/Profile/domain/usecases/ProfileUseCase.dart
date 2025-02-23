@@ -3,7 +3,6 @@ import '../../../../core/errors/failure.dart';
 import '../entities/ProfileEntity.dart';
 import '../repositories/ProfileRepository.dart';
 
-
 class ProfileUseCase {
   final ProfileRepository repository;
 

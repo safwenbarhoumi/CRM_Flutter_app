@@ -1,5 +1,3 @@
-
-
 class GeoEntity {
   final String lat;
   final String lng;

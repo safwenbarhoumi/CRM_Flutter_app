@@ -16,4 +16,3 @@ class GetUserButton extends StatelessWidget {
     );
   }
 }
-
