@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'Chat/chat_list_screen.dart';
 import 'HomePage/screens/home_screen.dart';
 import 'ProfileScreen.dart';
-import 'VideoCall/VideoCall.dart';
 
 class NavigationBottomBar extends StatefulWidget {
   @override
@@ -14,7 +13,7 @@ class _NavigationBottomBarState extends State<NavigationBottomBar> {
 
   final List<Widget> _pages = [
     HomeScreen(),
-    VideoCall(),
+    //VideoCall(),
     ChatListScreen(),
     ProfileScreen(),
     // HomePage(),

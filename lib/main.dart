@@ -5,14 +5,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:happytech_clean_architecture/core/databases/cache/cache_helper.dart';
 import 'Views/NavigationBottomBar.dart';
 import 'Views/ProfileScreen.dart';
+import 'Views/SignUpSreen/SignuUp_Sreen.dart';
 import 'Views/Skip.dart';
-import 'Views/register.dart';
 import 'core/databases/api/dio_consumer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper().init();
-
   runApp(const MyApp());
 }
 

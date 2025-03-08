@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../constants/colors.dart';
 import '../constants/images.dart';
 import '../constants/text.dart';
-import '../model/doctor_information_model.dart';
+import '../../../Models/doctor_information_model.dart';
 import 'doctor_details.dart';
 
 class DoctorDescription extends StatelessWidget {

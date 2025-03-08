@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../constants/colors.dart';
-import '../model/medical_services_model.dart';
+import '../../../Models/medical_services_model.dart';
 
+///! consultation, Dental, Heart,...
 class MedicalServices extends StatelessWidget {
   const MedicalServices({
     Key? key,

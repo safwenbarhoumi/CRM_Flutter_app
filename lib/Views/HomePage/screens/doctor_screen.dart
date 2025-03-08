@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../data/doctor_information_data.dart';
-import '../model/doctor_information_model.dart';
+import '../../../Models/doctor_information_model.dart';
 import '../widgets/doctor_description.dart';
 import '../widgets/doctor_image.dart';
 

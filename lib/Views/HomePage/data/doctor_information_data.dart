@@ -1,6 +1,6 @@
 import '../constants/images.dart';
 import '../constants/text.dart';
-import '../model/doctor_information_model.dart';
+import '../../../Models/doctor_information_model.dart';
 
 List<DoctorInformationModel> doctorInformation = [
   DoctorInformationModel(

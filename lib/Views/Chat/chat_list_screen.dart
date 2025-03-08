@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'chat.dart';
 
-import 'package:flutter/material.dart';
-import 'chat.dart';
-
 class ChatListScreen extends StatelessWidget {
   final List<Map<String, String>> chats = [
     {

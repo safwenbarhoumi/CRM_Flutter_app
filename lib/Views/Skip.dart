@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-
-import 'AuthPage.dart';
+import 'AuthentificationScreen/AuthPage.dart';
 
 class Skip extends StatefulWidget {
   @override
