@@ -4,41 +4,41 @@ import 'chat.dart';
 class ChatListScreen extends StatelessWidget {
   final List<Map<String, String>> chats = [
     {
-      "name": "Iron Man",
-      "message": "Hey dude! Even dead I'm the hero.",
+      "name": "Mohamed",
+      "message": "Even dead I'm the hero.",
       "time": "5:00 PM",
       "image": "assets/iron_man.png"
     },
     {
-      "name": "Captain America",
+      "name": "Kaptan ",
       "message": "Hey, how’s it going?",
       "time": "4:30 PM",
       "image": "assets/captain_america.png"
     },
     {
-      "name": "Spider Man",
+      "name": "Sabir Man",
       "message": "I’m exposed now. Please help!",
       "time": "2:00 PM",
       "image": "assets/spider_man.png"
     },
     {
-      "name": "Hulk",
+      "name": "Halim",
       "message": "HULK SMASH!!",
       "time": "1:30 PM",
       "image": "assets/hulk.png"
     },
     {
-      "name": "Thor",
+      "name": "Tarek",
       "message": "I'm hitting the gym bro.",
       "time": "12:30 PM",
       "image": "assets/thor.png"
     },
     {
-      "name": "Scarlet Witch",
+      "name": "Salma",
       "message": "My twins are giving me a headache.",
       "time": "11:30 AM",
       "image": "assets/scarlet_witch.png"
-    },
+    }
   ];
 
   @override

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../Models/doctor_information_model.dart';
 import '../../../Models/medical_services_model.dart';
 import '../constants/constants.dart';

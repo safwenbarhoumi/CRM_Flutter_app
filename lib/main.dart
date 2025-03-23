@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:happytech_clean_architecture/core/databases/cache/cache_helper.dart';
+import 'Controllers/loginController.dart';
+import 'Controllers/signup_provider.dart';
 import 'Views/NavigationBottomBar.dart';
 import 'Views/ProfileScreen.dart';
 import 'Views/SignUpSreen/SignuUp_Sreen.dart';
@@ -28,6 +30,8 @@ class MyApp extends StatelessWidget {
         return MultiProvider(
           providers: [
             Provider<DioConsumer>(create: (_) => DioConsumer(dio: Dio())),
+            ChangeNotifierProvider(create: (context) => SignUpProvider()),
+            ChangeNotifierProvider(create: (context) => LoginController()),
             // Add other providers here
           ],
           child: MaterialApp(
