@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../constants/colors.dart';
 import '../constants/text.dart';
 import '../model/doctor_information_model.dart';
@@ -24,37 +23,33 @@ class DoctorDetails extends StatelessWidget {
           Expanded(
             child: DetailInfo(
               text: AppText.experience,
-              number:
-                  '${doctorInformationModel.nExperience}', // Static value for experience (can be dynamic based on model if needed)
+              number: '${doctorInformationModel.nExperience}',
               subtitle: ' yr',
             ),
           ),
           VerticalDivider(
             indent: 20.h,
             endIndent: 20.h,
-            thickness:
-                1, // Use pixel thickness or the appropriate unit, not `w`
+            thickness: 1.w,
             color: AppColors.textGrey,
           ),
           Expanded(
             child: DetailInfo(
               text: AppText.patient,
-              number:
-                  '${doctorInformationModel.nPatient}', // Static value for patients (can be dynamic based on model if needed)
+              number: '${doctorInformationModel.nPatient}',
               subtitle: ' ps',
             ),
           ),
           VerticalDivider(
             indent: 20.h,
             endIndent: 20.h,
-            thickness: 1, // Same adjustment here for thickness
+            thickness: 1.w,
             color: AppColors.textGrey,
           ),
           Expanded(
             child: DetailInfo(
               text: AppText.rating,
-              number: '${doctorInformationModel.star}', // Use the dynamic value
-              // subtitle: '${doctorInformationModel.specialist}', // If no subtitle is required
+              number: '${doctorInformationModel.star}',
             ),
           ),
         ],

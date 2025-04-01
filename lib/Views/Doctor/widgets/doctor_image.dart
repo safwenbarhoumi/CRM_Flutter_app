@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../model/doctor_information_model.dart';
 import 'custom_appbar.dart';
 

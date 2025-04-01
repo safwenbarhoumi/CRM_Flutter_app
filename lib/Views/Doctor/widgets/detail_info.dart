@@ -18,8 +18,8 @@ class DetailInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100.h, // Adapter la hauteur à l'écran
-      width: 90.w, // Adapter la largeur à l'écran
+      height: 100.h,
+      width: 90.w,
       child: Column(
         mainAxisSize: MainAxisSize.min, // Éviter l'overflow vertical
         mainAxisAlignment: MainAxisAlignment.center, // Centrer les éléments

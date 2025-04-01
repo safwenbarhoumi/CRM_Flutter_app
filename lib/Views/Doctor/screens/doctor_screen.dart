@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../data/doctor_information_data.dart';
 import '../model/doctor_information_model.dart';
 import '../widgets/doctor_description.dart';
@@ -26,12 +27,13 @@ class _DoctorScreenState extends State<DoctorScreen> {
   void fetchData() async {
     try {
       List<DoctorInformationModel> data = await fetchTop10Doctors();
-      print("Données reçues : $data"); // 🔍 DEBUG
+      print("\uD83D\uDD0D Donn\u00e9es re\u00e7ues : $data");
       setState(() {
         doctorInformations = data;
       });
     } catch (e) {
-      print("❌ Erreur lors de la récupération des données : $e");
+      print(
+          "\u274C Erreur lors de la r\u00e9cup\u00e9ration des donn\u00e9es : $e");
     }
   }
 
@@ -44,10 +46,13 @@ class _DoctorScreenState extends State<DoctorScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 20.h),
               DoctorImage(
                   doctorInformationModel: widget.doctorInformationModel),
+              SizedBox(height: 20.h),
               DoctorDescription(
                   doctorInformationModel: widget.doctorInformationModel),
+              SizedBox(height: 20.h),
             ],
           ),
         ),

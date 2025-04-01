@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../constants/colors.dart';
 import '../constants/text.dart';
 import '../model/doctor_information_model.dart';
@@ -24,7 +23,8 @@ class DoctorInformation extends StatelessWidget {
           Navigator.of(context).push(
             PageRouteBuilder(
               pageBuilder: (_, __, ___) => DoctorScreen(
-                  doctorInformationModel: doctorInformations[index]),
+                doctorInformationModel: doctorInformations[index],
+              ),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) =>
                       FadeTransition(opacity: animation, child: child),
@@ -62,24 +62,22 @@ class DoctorInformation extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Expanded(
-                        // Use Expanded to allow flexible space for text
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Expanded(
-                              child: Text(
-                                doctorInformations[index].title,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineMedium
-                                    ?.copyWith(fontSize: 16.sp),
-                              ),
+                            Text(
+                              doctorInformations[index].title,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineMedium
+                                  ?.copyWith(fontSize: 16.sp),
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  Text.rich(
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text.rich(
                                     TextSpan(
                                       style: Theme.of(context)
                                           .textTheme
@@ -88,48 +86,49 @@ class DoctorInformation extends StatelessWidget {
                                         TextSpan(
                                             text: doctorInformations[index]
                                                 .specialist),
-                                        TextSpan(text: '  •  '),
+                                        const TextSpan(text: '  •  '),
                                         TextSpan(
                                             text: doctorInformations[index]
                                                 .location),
                                       ],
                                     ),
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                            Expanded(
-                              child: Row(
-                                children: List.generate(
-                                  5,
-                                  (index) => Icon(
-                                    Icons.star_rounded,
-                                    color: AppColors.yellow,
-                                    size: 20.sp,
-                                  ),
+                            Row(
+                              children: List.generate(
+                                5,
+                                (i) => Icon(
+                                  Icons.star_rounded,
+                                  color: AppColors.yellow,
+                                  size: 20.sp,
                                 ),
                               ),
                             ),
                           ],
                         ),
                       ),
-                      Container(
-                        height: 25.h,
-                        width: 56.w,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.r),
-                          color: AppColors.boxGreen,
-                        ),
-                        child: Center(
-                          child: Text(
-                            AppText.open,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .copyWith(
-                                  color: AppColors.green,
-                                  fontSize: 14.sp, // Apply flutter_screenutil
-                                ),
+                      Flexible(
+                        child: Container(
+                          height: 25.h,
+                          width: 50.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5.r),
+                            color: AppColors.boxGreen,
+                          ),
+                          child: Center(
+                            child: Text(
+                              AppText.open,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .copyWith(
+                                    color: AppColors.green,
+                                    fontSize: 14.sp,
+                                  ),
+                            ),
                           ),
                         ),
                       ),

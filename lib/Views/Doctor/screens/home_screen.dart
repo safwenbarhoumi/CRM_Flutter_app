@@ -11,10 +11,6 @@ import '../widgets/doctors_information.dart';
 import '../widgets/medical_services.dart';
 import '../widgets/textbox.dart';
 
-import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
 import 'allDoctorList.dart';
 
 class HomeDoctorScreen extends StatefulWidget {
@@ -26,7 +22,7 @@ class HomeDoctorScreen extends StatefulWidget {
 
 class _HomeDoctorScreenState extends State<HomeDoctorScreen> {
   List<DoctorInformationModel> doctorInformations = [];
-  bool isLoading = true; // Indicateur de chargement
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -42,7 +38,8 @@ class _HomeDoctorScreenState extends State<HomeDoctorScreen> {
         isLoading = false;
       });
     } catch (e) {
-      print("❌ Erreur lors de la récupération des données : $e");
+      print(
+          "\u274C Erreur lors de la r\u00e9cup\u00e9ration des donn\u00e9es : $e");
       setState(() {
         isLoading = false;
       });
@@ -72,7 +69,9 @@ class _HomeDoctorScreenState extends State<HomeDoctorScreen> {
                 SizedBox(height: 20.h),
                 Text(
                   AppText.findDoctor,
-                  style: Theme.of(context).textTheme.displayLarge,
+                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                        fontSize: 24.sp,
+                      ),
                 ),
                 SizedBox(height: 20.h),
                 const CustomTextBox(),
@@ -84,7 +83,9 @@ class _HomeDoctorScreenState extends State<HomeDoctorScreen> {
                   children: [
                     Text(
                       AppText.topDoctors,
-                      style: Theme.of(context).textTheme.displaySmall,
+                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                            fontSize: 18.sp,
+                          ),
                     ),
                     TextButton(
                       onPressed: () {
@@ -96,7 +97,8 @@ class _HomeDoctorScreenState extends State<HomeDoctorScreen> {
                       },
                       child: Text(
                         AppText.viewAll,
-                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              fontSize: 16.sp,
                               color: AppColors.blue,
                               fontWeight: FontWeight.bold,
                             ),
@@ -105,15 +107,17 @@ class _HomeDoctorScreenState extends State<HomeDoctorScreen> {
                   ],
                 ),
                 SizedBox(height: 20.h),
-
-                // 🔄 AFFICHAGE DES DONNÉES OU LOADER
                 isLoading
                     ? Center(child: CircularProgressIndicator())
                     : doctorInformations.isEmpty
-                        ? Center(child: Text("Aucun docteur trouvé."))
+                        ? Center(
+                            child: Text(
+                              "Aucun docteur trouv\u00e9.",
+                              style: TextStyle(fontSize: 16.sp),
+                            ),
+                          )
                         : DoctorInformation(
                             doctorInformations: doctorInformations),
-
                 SizedBox(height: 20.h),
               ],
             ),
