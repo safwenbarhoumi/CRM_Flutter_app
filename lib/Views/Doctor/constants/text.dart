@@ -6,7 +6,7 @@ class AppText {
   static const String searchDoctor = "Search doctor, medicines etc";
   static const String open = "Open";
   static const String closed = "Closed";
-  static const String consultation = "Consultation";
+  static const String consultation = "Cardiologist";
   static const String dental = "Dental";
   static const String heart = "Heart";
   static const String hospitals = "Hospitals";
