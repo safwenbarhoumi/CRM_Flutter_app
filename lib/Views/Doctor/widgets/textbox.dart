@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../constants/colors.dart';
 import '../constants/text.dart';
 
@@ -11,7 +12,7 @@ class CustomTextBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       keyboardAppearance: Brightness.dark,
-      style: const TextStyle(color: AppColors.black),
+      style: TextStyle(color: AppColors.black),
       decoration: InputDecoration(
         suffixIcon: const Icon(
           Icons.search,

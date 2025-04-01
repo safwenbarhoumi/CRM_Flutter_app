@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../constants/colors.dart';
 import '../constants/images.dart';
 import '../constants/text.dart';
-import '../../../Models/doctor_information_model.dart';
+import '../model/doctor_information_model.dart';
 import 'doctor_details.dart';
 
 class DoctorDescription extends StatelessWidget {
@@ -34,17 +35,18 @@ class DoctorDescription extends StatelessWidget {
                   children: [
                     TextSpan(text: doctorInformationModel.specialist),
                     const TextSpan(text: '  •  '),
-                    TextSpan(text: doctorInformationModel.hospital),
+                    TextSpan(text: doctorInformationModel.location),
                   ],
                 ),
               ),
             ],
           ),
           SizedBox(height: 20.h),
+          //Text('${doctorInformationModel.title} is one of the best doctors in the ${doctorInformationModel.specialist}. He has saved more than 1000 patients in the past 3 years. He has also received many awards from domestic and abroad as the best doctors. He is available on a private or schedule. '),
           Text(
-              '${doctorInformationModel.title} is one of the best doctors in the ${doctorInformationModel.hospital}. He has saved more than 1000 patients in the past 3 years. He has also received many awards from domestic and abroad as the best doctors. He is available on a private or schedule. '),
+              '${doctorInformationModel.description} ,,, ${doctorInformationModel.star}'), // description !
           SizedBox(height: 20.h),
-          const DoctorDetails(),
+          DoctorDetails(doctorInformationModel: doctorInformationModel),
           SizedBox(height: 20.h),
           Row(
             children: [

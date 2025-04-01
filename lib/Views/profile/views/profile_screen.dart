@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
+import 'package:provider/provider.dart';
+import '../../../Controllers/profile_controller.dart';
+import '../../Complete_profile.dart';
 import '../constants.dart';
 import 'components/profile_card.dart'; // 5
 import 'components/profile_menu_item_list_tile.dart'; // 6
@@ -22,7 +24,16 @@ class ProfileScreen extends StatelessWidget {
             // proLableText: "Sliver",
             // isPro: true, if the user is pro
             press: () {
-              // Navigator.pushNamed(context, userInfoScreenRoute);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider.value(
+                    value:
+                        Provider.of<ProfileController>(context, listen: false),
+                    child: CompleteProfile(),
+                  ),
+                ),
+              );
             },
           ),
 

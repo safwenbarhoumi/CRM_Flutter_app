@@ -2,20 +2,31 @@
 class Assets {
   Assets._();
 
+  static const String iconsAddress = 'assets/icons/Address.svg';
   static const String iconsBackarrow = 'assets/icons/backarrow.png';
   static const String iconsBandage = 'assets/icons/bandage.png';
   static const String iconsBookmark = 'assets/icons/bookmark.png';
+  static const String iconsCard = 'assets/icons/card.svg';
   static const String iconsCare = 'assets/icons/care.png';
   static const String iconsClinic = 'assets/icons/clinic.png';
   static const String iconsComments = 'assets/icons/comments.png';
+  static const String iconsFAQ = 'assets/icons/FAQ.svg';
   static const String iconsHeart = 'assets/icons/heart.png';
+  static const String iconsHelp = 'assets/icons/Help.svg';
+  static const String iconsLanguage = 'assets/icons/Language.svg';
+  static const String iconsLocation = 'assets/icons/Location.svg';
+  static const String iconsLogout = 'assets/icons/Logout.svg';
   static const String iconsMedicine = 'assets/icons/medicine.png';
   static const String iconsMenu = 'assets/icons/menu.png';
+  static const String iconsNotification = 'assets/icons/Notification.svg';
+  static const String iconsPreferences = 'assets/icons/Preferences.svg';
   static const String iconsSearch = 'assets/icons/search.png';
   static const String iconsStar = 'assets/icons/star.png';
   static const String iconsStethoscope = 'assets/icons/stethoscope.png';
   static const String iconsSyringe = 'assets/icons/syringe.png';
   static const String iconsTeeth = 'assets/icons/teeth.png';
+  static const String iconsWallet = 'assets/icons/Wallet.svg';
+  static const String imagesDefaultDoctor = 'assets/images/default_doctor.png';
   static const String imagesDisease = 'assets/images/disease.png';
   static const String imagesDoc = 'assets/images/doc.png';
   static const String imagesDoctor1 = 'assets/images/doctor1.png';

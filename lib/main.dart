@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:happytech_clean_architecture/core/databases/cache/cache_helper.dart';
 import 'Controllers/loginController.dart';
+import 'Controllers/profile_controller.dart';
 import 'Controllers/signup_provider.dart';
 import 'Views/NavigationBottomBar.dart';
 import 'Views/ProfileScreen.dart';
@@ -32,7 +33,10 @@ class MyApp extends StatelessWidget {
             Provider<DioConsumer>(create: (_) => DioConsumer(dio: Dio())),
             ChangeNotifierProvider(create: (context) => SignUpProvider()),
             ChangeNotifierProvider(create: (context) => LoginController()),
-            // Add other providers here
+            //ChangeNotifierProvider(create: (context) => ProfileController()),
+            ChangeNotifierProvider(create: (_) => ProfileController()),
+            // ChangeNotifierProvider(create: (context) => DoctorProvider()),
+            //ChangeNotifierProvider(create: (context) => DoctorProvider()..loadDoctors()),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

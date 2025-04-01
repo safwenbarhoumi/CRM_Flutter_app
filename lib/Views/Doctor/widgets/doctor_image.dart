@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../Models/doctor_information_model.dart';
+
+import '../model/doctor_information_model.dart';
 import 'custom_appbar.dart';
 
 class DoctorImage extends StatelessWidget {
@@ -18,21 +19,22 @@ class DoctorImage extends StatelessWidget {
       child: Stack(
         children: [
           Hero(
-            tag: "doctor-hero-${doctorInformationModel.id}",
-            child: Container(
-              height: 350,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                    doctorInformationModel.image,
+              tag: "doctor-hero-${doctorInformationModel.id}",
+              child: Container(
+                height: 350,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: doctorInformationModel.image != null &&
+                            doctorInformationModel.image!.isNotEmpty
+                        ? AssetImage(doctorInformationModel.image!)
+                            as ImageProvider
+                        : const AssetImage('assets/images/default_doctor.png'),
+                    fit: BoxFit.cover,
                   ),
-                  fit: BoxFit.cover,
                 ),
-              ),
-              child: const SizedBox(height: 20),
-            ),
-          ),
+                child: const SizedBox(height: 20),
+              )),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: CustomAppBar(

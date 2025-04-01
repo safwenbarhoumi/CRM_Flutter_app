@@ -93,7 +93,8 @@ class _SignInState extends State<SignIn> {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            CompleteProfile(), // NavigationBottomBar(),
+                            //CompleteProfile(), //
+                            NavigationBottomBar(),
                       ),
                     );
                   },

@@ -1,7 +1,7 @@
 import '../constants/colors.dart';
 import '../constants/images.dart';
 import '../constants/text.dart';
-import '../../../Models/medical_services_model.dart';
+import '../model/medical_services_model.dart';
 
 List<MedicalServicesModel> medicalService = [
   MedicalServicesModel(

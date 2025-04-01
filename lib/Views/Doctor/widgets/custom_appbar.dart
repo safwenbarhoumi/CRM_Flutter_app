@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../constants/colors.dart';
 import '../constants/images.dart';
 
@@ -17,7 +19,7 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 56,
+      height: 56.h,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -28,13 +30,13 @@ class CustomAppBar extends StatelessWidget {
             icon: Icon(
               icon,
               color: AppColors.black,
-              size: 25,
+              size: 25.sp,
             ),
           ),
           profile
               ? Container(
-                  height: 40,
-                  width: 40,
+                  height: 40.h,
+                  width: 40.w,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
@@ -46,14 +48,14 @@ class CustomAppBar extends StatelessWidget {
               : Container(
                   decoration: BoxDecoration(
                     color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: BorderRadius.circular(10.r),
                   ),
-                  height: 40,
-                  width: 40,
-                  child: const Icon(
+                  height: 40.h,
+                  width: 40.w,
+                  child: Icon(
                     Icons.bookmark,
                     color: AppColors.black,
-                    size: 25,
+                    size: 25.sp,
                   ),
                 ),
         ],

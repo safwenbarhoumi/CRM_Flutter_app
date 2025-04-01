@@ -3,11 +3,6 @@ import '../core/databases/cache/cache_helper.dart';
 import '../services/loginService.dart';
 import '../Models/login.dart';
 
-import 'package:flutter/material.dart';
-import '../core/databases/cache/cache_helper.dart';
-import '../services/loginService.dart';
-import '../Models/login.dart';
-
 class LoginController with ChangeNotifier {
   final LoginService _loginService = LoginService();
   bool _isLoading = false;
@@ -20,7 +15,7 @@ class LoginController with ChangeNotifier {
     final loginModel = LoginModel(
       email: email.trim(),
       password: password,
-      role: role.toUpperCase(), // Assurer que le rôle est en MAJUSCULES
+      role: role.toUpperCase(),
     );
 
     bool success = await _loginService.login(loginModel);
@@ -28,6 +23,7 @@ class LoginController with ChangeNotifier {
     if (success) {
       await CacheHelper().saveData(key: "isAuthenticated", value: true);
       await CacheHelper().saveData(key: "email", value: email);
+      await CacheHelper().saveData(key: "role", value: role.toUpperCase());
     }
 
     _isLoading = false;
