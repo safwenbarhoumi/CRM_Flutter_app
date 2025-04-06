@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../Controllers/loginController.dart';
-import '../Complete_profile.dart';
 import '../NavigationBottomBar.dart';
 import 'sign_in_widgets.dart';
 import 'package:provider/provider.dart';
@@ -92,9 +91,7 @@ class _SignInState extends State<SignIn> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            //CompleteProfile(), //
-                            NavigationBottomBar(),
+                        builder: (context) => NavigationBottomBar(),
                       ),
                     );
                   },

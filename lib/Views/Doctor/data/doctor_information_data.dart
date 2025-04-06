@@ -4,7 +4,7 @@ import '../model/doctor_information_model.dart';
 
 Future<List<DoctorInformationModel>> fetchAllDoctors() async {
   final response =
-      await http.get(Uri.parse('http://192.168.8.186:8091/doctor/all'));
+      await http.get(Uri.parse('http://192.168.1.104:8091/doctor/all'));
 
   if (response.statusCode == 200) {
     List<dynamic> data = json.decode(response.body);
@@ -18,7 +18,7 @@ Future<List<DoctorInformationModel>> fetchAllDoctors() async {
 Future<List<DoctorInformationModel>> fetchDoctorsByCategory(
     String category) async {
   final response = await http
-      .get(Uri.parse('http://192.168.8.186:8091/doctor/category/$category'));
+      .get(Uri.parse('http://192.168.1.104:8091/doctor/category/$category'));
 
   if (response.statusCode == 200) {
     List<dynamic> data = json.decode(response.body);
@@ -30,7 +30,7 @@ Future<List<DoctorInformationModel>> fetchDoctorsByCategory(
 
 Future<List<DoctorInformationModel>> fetchTop10Doctors() async {
   final response =
-      await http.get(Uri.parse('http://192.168.8.186:8091/doctor/top10'));
+      await http.get(Uri.parse('http://192.168.1.104:8091/doctor/top10'));
 
   if (response.statusCode == 200) {
     List<dynamic> data = json.decode(response.body);

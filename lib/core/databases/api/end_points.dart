@@ -1,5 +1,5 @@
 class EndPoints {
-  static const String baserUrl = "http://192.168.1.104:5000/";
+  static const String baserUrl = "http://localhost:8080";
   static const String template = "template/";
   static const String user = "users/";
   static const String post = "posts/";

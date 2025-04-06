@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import '../../../Controllers/profile_controller.dart';
+import '../../../core/databases/cache/cache_helper.dart';
 import '../../Complete_profile.dart';
 import '../constants.dart';
 import 'components/profile_card.dart'; // 5
@@ -13,16 +14,14 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String? cachedEmail = CacheHelper().getDataString(key: 'email');
     return Scaffold(
       body: ListView(
         children: [
           ProfileCard(
             name: "Nehed",
-            email: "haguinehed@gmail.com",
-            imageSrc:
-                "assets/images/doctor3.png", //"https://i.imgur.com/IXnwbLk.png",
-            // proLableText: "Sliver",
-            // isPro: true, if the user is pro
+            email: cachedEmail ?? "No email found",
+            imageSrc: "assets/images/doctor3.png",
             press: () {
               Navigator.push(
                 context,
@@ -36,7 +35,6 @@ class ProfileScreen extends StatelessWidget {
               );
             },
           ),
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
             child: Text(
@@ -48,23 +46,17 @@ class ProfileScreen extends StatelessWidget {
           ProfileMenuListTile(
             text: "Addresses",
             svgSrc: "assets/icons/Address.svg",
-            press: () {
-              // Navigator.pushNamed(context, addressesScreenRoute);
-            },
+            press: () {},
           ),
           ProfileMenuListTile(
             text: "Payment",
             svgSrc: "assets/icons/card.svg",
-            press: () {
-              // Navigator.pushNamed(context, emptyPaymentScreenRoute);
-            },
+            press: () {},
           ),
           ProfileMenuListTile(
             text: "Wallet",
             svgSrc: "assets/icons/Wallet.svg",
-            press: () {
-              // Navigator.pushNamed(context, walletScreenRoute);
-            },
+            press: () {},
           ),
           const SizedBox(height: defaultPadding),
           Padding(
@@ -79,16 +71,12 @@ class ProfileScreen extends StatelessWidget {
             svgSrc: "assets/icons/Notification.svg",
             title: "Notification",
             trilingText: "Off",
-            press: () {
-              // Navigator.pushNamed(context, enableNotificationScreenRoute);
-            },
+            press: () {},
           ),
           ProfileMenuListTile(
             text: "Preferences",
             svgSrc: "assets/icons/Preferences.svg",
-            press: () {
-              // Navigator.pushNamed(context, preferencesScreenRoute);
-            },
+            press: () {},
           ),
           const SizedBox(height: defaultPadding),
           Padding(
@@ -102,9 +90,7 @@ class ProfileScreen extends StatelessWidget {
           ProfileMenuListTile(
             text: "Language",
             svgSrc: "assets/icons/Language.svg",
-            press: () {
-              // Navigator.pushNamed(context, selectLanguageScreenRoute);
-            },
+            press: () {},
           ),
           ProfileMenuListTile(
             text: "Location",
@@ -123,9 +109,7 @@ class ProfileScreen extends StatelessWidget {
           ProfileMenuListTile(
             text: "Get Help",
             svgSrc: "assets/icons/Help.svg",
-            press: () {
-              // Navigator.pushNamed(context, getHelpScreenRoute);
-            },
+            press: () {},
           ),
           ProfileMenuListTile(
             text: "FAQ",
@@ -137,7 +121,34 @@ class ProfileScreen extends StatelessWidget {
 
           // Log Out
           ListTile(
-            onTap: () {},
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text("Logout"),
+                    content: const Text("Are you sure you want to log out?"),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text("Cancel"),
+                      ),
+                      TextButton(
+                        onPressed: () async {
+                          await CacheHelper().removeData(key: 'email');
+                          Navigator.of(context).pop();
+                          Navigator.pushReplacementNamed(context, '/signup');
+                        },
+                        child: const Text("Logout",
+                            style: TextStyle(color: errorColor)),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
             minLeadingWidth: 24,
             leading: SvgPicture.asset(
               "assets/icons/Logout.svg",

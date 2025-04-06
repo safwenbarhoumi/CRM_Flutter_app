@@ -6,6 +6,77 @@ import 'package:uuid/uuid.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'package:provider/provider.dart';
+
+import '../../Controllers/chatController.dart';
+
+class ChatScreen extends StatefulWidget {
+  final String receiverEmail;
+  const ChatScreen({Key? key, required this.receiverEmail}) : super(key: key);
+
+  @override
+  _ChatScreenState createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  final TextEditingController _textController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() => context.read<ChatController>().fetchMessages());
+  }
+
+  void _handleSendPressed(String text) {
+    if (text.trim().isEmpty) return;
+    context.read<ChatController>().sendMessage(text, widget.receiverEmail);
+    _textController.clear();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Chat')),
+      body: Column(
+        children: [
+          Expanded(
+            child: Consumer<ChatController>(
+              builder: (context, chatController, child) {
+                return Chat(
+                  messages: chatController.messages,
+                  onSendPressed: (types.PartialText message) =>
+                      _handleSendPressed(message.text),
+                  user: types.User(id: chatController.userEmail ?? ''),
+                );
+              },
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(8),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _textController,
+                    decoration: const InputDecoration(
+                      hintText: 'Type a message...',
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.send),
+                  onPressed: () => _handleSendPressed(_textController.text),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/*
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
 
@@ -113,6 +184,7 @@ class _ChatScreenState extends State<ChatScreen> {
               user: _currentUser,
             ),
           ),
+          Text("testtttttt"),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
             color: Colors.white,
@@ -157,3 +229,4 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 }
+*/

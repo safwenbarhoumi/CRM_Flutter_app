@@ -27,7 +27,7 @@ class _AllDoctorsScreenState extends State<AllDoctorsScreen> {
   Future<void> fetchDoctors() async {
     try {
       final response =
-          await http.get(Uri.parse('http://192.168.8.186:8091/doctor/all'));
+          await http.get(Uri.parse('http://192.168.1.104:8091/doctor/all'));
 
       if (response.statusCode == 200) {
         List<dynamic> data = json.decode(response.body);

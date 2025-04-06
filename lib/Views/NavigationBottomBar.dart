@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'BookingScreen/booking_screen.dart';
 import 'Chat/chat_list_screen.dart';
 import 'Doctor/screens/home_screen.dart';
 import 'DoctorSpace/views/home.dart';
@@ -11,13 +12,15 @@ class NavigationBottomBar extends StatefulWidget {
 
 class _NavigationBottomBarState extends State<NavigationBottomBar> {
   int _selectedIndex = 0;
+  // final String? userEmail = "john.doe1@example.com";
 
   final List<Widget> _pages = [
     // DoctorSpace(),
+    // BookingScreen(),
     HomeDoctorScreen(),
     HomePage(),
     //VideoCall(),
-    ChatListScreen(),
+    ChatListScreen(userEmail: "john.doe1@example.com"),
     ProfileScreen(),
     //ProfileScreen(),
     // HomePage(),
