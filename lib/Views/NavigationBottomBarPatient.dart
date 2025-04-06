@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'BookingScreen/booking_screen.dart';
+import '../core/databases/cache/cache_helper.dart';
 import 'Chat/chat_list_screen.dart';
 import 'Doctor/screens/home_screen.dart';
 import 'DoctorSpace/views/home.dart';
@@ -12,22 +12,22 @@ class NavigationBottomBar extends StatefulWidget {
 
 class _NavigationBottomBarState extends State<NavigationBottomBar> {
   int _selectedIndex = 0;
-  // final String? userEmail = "john.doe1@example.com";
+  String? patientEmail;
+  List<Widget> _pages = [];
 
-  final List<Widget> _pages = [
-    // DoctorSpace(),
-    // BookingScreen(),
-    HomeDoctorScreen(),
-    HomePage(),
-    //VideoCall(),
-    ChatListScreen(userEmail: "john.doe1@example.com"),
-    ProfileScreen(),
-    //ProfileScreen(),
-    // HomePage(),
-    // AppointmentsScreen(),
-    // ChatScreen(),
-    // ProfileScreen(),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    patientEmail = CacheHelper().getDataString(key: 'email');
+    // Initialize the _pages list after patientEmail is set
+
+    _pages = [
+      HomeDoctorScreen(),
+      HomePage(),
+      ChatListScreen(userEmail: patientEmail ?? ''),
+      ProfileScreen(),
+    ];
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -72,7 +72,9 @@ class _NavigationBottomBarState extends State<NavigationBottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_selectedIndex], // Navigates to the selected screen
+      body: _pages.isNotEmpty
+          ? _pages[_selectedIndex]
+          : Container(), // Check if _pages is populated
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,

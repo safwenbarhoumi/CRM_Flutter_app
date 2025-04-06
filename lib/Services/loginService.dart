@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../Models/login.dart';
+import '../core/databases/api/end_points.dart';
+import '../core/databases/cache/cache_helper.dart';
 
 class LoginService {
-  Future<bool> login(LoginModel loginModel) async {
+  Future<String?> login(LoginModel loginModel) async {
     final url = Uri.parse(
-        "http://192.168.1.104:8091/${loginModel.role.toLowerCase()}/login");
+        "${EndPoints.baserUrl}/${loginModel.role.toLowerCase()}/login");
     final response = await http.post(
       url,
       headers: {"Content-Type": "application/json"},
@@ -16,9 +18,10 @@ class LoginService {
     print("Response Body: ${response.body}");
 
     if (response.statusCode == 200) {
-      return true;
+      final data = jsonDecode(response.body);
+      return data['id']; // ✅ Return user ID
     } else {
-      return false;
+      return null;
     }
   }
 }

@@ -63,7 +63,7 @@ class _DoctorByCategorieScreenState extends State<DoctorByCategorieScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Doctors in ${widget.category}",
+                      "   ${widget.category}",
                       style: Theme.of(context).textTheme.displaySmall,
                     ),
                   ],

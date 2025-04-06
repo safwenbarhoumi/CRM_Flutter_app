@@ -18,7 +18,7 @@ class DoctorImage extends StatelessWidget {
       child: Stack(
         children: [
           Hero(
-              tag: "doctor-hero-${doctorInformationModel.id}",
+              tag: "doctor-hero-${doctorInformationModel.title}",
               child: Container(
                 height: 350,
                 width: double.infinity,

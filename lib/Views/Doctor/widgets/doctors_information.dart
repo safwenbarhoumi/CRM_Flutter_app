@@ -67,7 +67,7 @@ class DoctorInformation extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              doctorInformations[index].title,
+                              doctorInformations[index].firstName,
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineMedium
@@ -85,7 +85,7 @@ class DoctorInformation extends StatelessWidget {
                                       children: [
                                         TextSpan(
                                             text: doctorInformations[index]
-                                                .specialist),
+                                                .title),
                                         const TextSpan(text: '  •  '),
                                         TextSpan(
                                             text: doctorInformations[index]

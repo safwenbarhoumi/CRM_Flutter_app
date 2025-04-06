@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../Models/signup.dart';
+import '../core/databases/api/end_points.dart';
 
 class SignUpService {
   Future<String> signUp(SignUpModel user) async {
     final String url =
-        "http://192.168.1.104:8091/${user.role.toLowerCase()}/signup";
+        "${EndPoints.baserUrl}/${user.role.toLowerCase()}/signup";
     final response = await http.post(
       Uri.parse(url),
       headers: {"Content-Type": "application/json"},

@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../Models/profile_model.dart';
+import '../core/databases/api/end_points.dart';
 
 class ProfileService {
   Future<bool> completeProfile(ProfileModel profile, String role) async {
-    String url =
-        "http://192.168.1.104:8091/${role.toLowerCase()}/complete-profile";
+    String url = "${EndPoints.baserUrl}/${role.toLowerCase()}/complete-profile";
 
     print("📡 Sending profile data to: $url");
     print("📝 Data: ${profile.toJson()}");

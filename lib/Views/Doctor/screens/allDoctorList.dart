@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
+import '../../../core/databases/api/end_points.dart';
 import '../constants/colors.dart';
 import '../constants/text.dart';
 import '../data/doctor_information_data.dart';
@@ -27,7 +28,7 @@ class _AllDoctorsScreenState extends State<AllDoctorsScreen> {
   Future<void> fetchDoctors() async {
     try {
       final response =
-          await http.get(Uri.parse('http://192.168.1.104:8091/doctor/all'));
+          await http.get(Uri.parse('${EndPoints.baserUrl}/doctor/all'));
 
       if (response.statusCode == 200) {
         List<dynamic> data = json.decode(response.body);

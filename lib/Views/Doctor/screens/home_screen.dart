@@ -35,6 +35,7 @@ class _HomeDoctorScreenState extends State<HomeDoctorScreen> {
       List<DoctorInformationModel> data = await fetchTop10Doctors();
       setState(() {
         doctorInformations = data;
+        print("doctor data fel mockla ---------------------> $data");
         isLoading = false;
       });
     } catch (e) {

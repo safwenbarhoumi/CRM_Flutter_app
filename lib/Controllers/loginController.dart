@@ -16,18 +16,25 @@ class LoginController with ChangeNotifier {
       email: email.trim(),
       password: password,
       role: role.toUpperCase(),
+      id: '',
     );
 
-    bool success = await _loginService.login(loginModel);
+    final String? userId = (await _loginService.login(loginModel)) as String?;
 
-    if (success) {
+    print("userId:===================> $userId");
+
+    if (userId != null) {
       await CacheHelper().saveData(key: "isAuthenticated", value: true);
       await CacheHelper().saveData(key: "email", value: email);
       await CacheHelper().saveData(key: "role", value: role.toUpperCase());
+      await CacheHelper().saveData(key: "id", value: userId);
+      _isLoading = false;
+      notifyListeners();
+      return true;
     }
 
     _isLoading = false;
     notifyListeners();
-    return success;
+    return false;
   }
 }

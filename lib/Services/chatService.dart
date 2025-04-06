@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
+import '../core/databases/api/end_points.dart';
+
 class ChatService {
-  final String baseUrl = 'http://192.168.1.104:8091/conversations';
+  final String baseUrl = '${EndPoints.baserUrl}/conversations';
 
   Future<List<types.Message>> getMessages(String userEmail) async {
     final response = await http.get(Uri.parse('$baseUrl/user/$userEmail'));

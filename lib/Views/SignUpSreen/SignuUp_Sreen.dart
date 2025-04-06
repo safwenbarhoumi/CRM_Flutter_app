@@ -3,6 +3,7 @@ import 'package:happytech_clean_architecture/Models/signup.dart';
 import 'package:provider/provider.dart';
 import '../../Controllers/signup_provider.dart';
 import '../../Services/signup.dart';
+import '../SignInSreen/signIn_sreen.dart';
 import 'register_widgets.dart';
 
 class Register extends StatefulWidget {
@@ -36,6 +37,10 @@ class _RegisterState extends State<Register> {
               key: _formKey,
               child: Column(
                 children: [
+                  Text("Create an account",
+                      style:
+                          TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+                  SizedBox(height: 20),
                   CustomTextField(
                       controller: _firstNameController,
                       hint: "First Name",
@@ -119,6 +124,21 @@ class _RegisterState extends State<Register> {
                         ],
                       );
                     },
+                  ),
+                  SizedBox(height: 10),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => SignIn()),
+                      );
+                    },
+                    child: Text(
+                      "Already have an account? Login",
+                      style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: Colors.blue),
+                    ),
                   ),
                 ],
               ),

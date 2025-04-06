@@ -41,7 +41,7 @@ class GreetingText extends StatelessWidget {
             ),
           ),
           Text(
-            'Welcome to Medico!',
+            'Welcome to Polyclinique Chaambi!',
             style: GoogleFonts.b612(
               color: Colors.indigo[800],
               fontSize: 17.sp,

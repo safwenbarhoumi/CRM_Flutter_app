@@ -8,7 +8,8 @@ import 'Controllers/chatController.dart';
 import 'Controllers/loginController.dart';
 import 'Controllers/profile_controller.dart';
 import 'Controllers/signup_provider.dart';
-import 'Views/NavigationBottomBar.dart';
+import 'Services/appointment_history_service.dart';
+import 'Views/NavigationBottomBarPatient.dart';
 import 'Views/ProfileScreen.dart';
 import 'Views/SignUpSreen/SignuUp_Sreen.dart';
 import 'Views/Skip.dart';
@@ -53,6 +54,8 @@ class MyApp extends StatelessWidget {
                 ChangeNotifierProvider(create: (_) => ProfileController()),
                 ChangeNotifierProvider(create: (_) => ChatController()),
                 ChangeNotifierProvider(create: (_) => BookingController()),
+                ChangeNotifierProvider(
+                    create: (_) => AppointmentHistoryService()),
               ],
               child: MaterialApp(
                 debugShowCheckedModeBanner: false,

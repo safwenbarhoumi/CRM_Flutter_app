@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../core/databases/api/end_points.dart';
+import '../../../core/databases/cache/cache_helper.dart';
 import '../../BookingScreen/booking_screen.dart';
 import '../constants/colors.dart';
 import '../constants/images.dart';
@@ -72,13 +78,52 @@ class DoctorDescription extends StatelessWidget {
                   ),
                   child: Center(
                     child: GestureDetector(
-                      onTap: () {
+                      /*onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => BookingScreen(
                               patientId: '67d5b2014ea30a4efe6ce02f',
                               doctorId: '67f0f5821b61281b787d1952',
+                            ),
+                          ),
+                        );
+                      },*/
+
+                      onTap: () async {
+                        String? patientId =
+                            CacheHelper().getDataString(key: 'id');
+                        print("Patient ID: $patientId");
+
+                        if (patientId == null || patientId.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Patient non connecté')),
+                          );
+                          return;
+                        }
+
+                        final doctorEmail = doctorInformationModel
+                            .title; // ← ici tu dois t’assurer que "title" contient bien l’email !
+                        print("Doctor email used to fetch ID: $doctorEmail");
+
+                        final doctorId =
+                            "await fetchDoctorIdByEmail(doctorEmail!)";
+
+                        if (doctorId == null || doctorId.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                content: Text(
+                                    "Impossible de récupérer l'identifiant du docteur")),
+                          );
+                          return;
+                        }
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BookingScreen(
+                              patientId: patientId,
+                              doctorId: doctorId,
                             ),
                           ),
                         );

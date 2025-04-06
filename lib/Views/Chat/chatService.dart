@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import '../../core/databases/api/end_points.dart';
+
 Future<List<ConversationModel>> fetchUserConversations(String userEmail) async {
   final response = await http.get(
-    Uri.parse('http://192.168.1.104:8091/conversations/user/$userEmail'),
+    Uri.parse('${EndPoints.baserUrl}/conversations/user/$userEmail'),
   );
 
   if (response.statusCode == 200) {

@@ -2,8 +2,10 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
+import '../core/databases/api/end_points.dart';
+
 class BookingService {
-  static const String baseUrl = 'http://192.168.1.104:8091/appointments';
+  static const String baseUrl = '${EndPoints.baserUrl}/appointments';
 
   static Future<Map<String, List<String>>> getAvailableTimes(
       String doctorId) async {
